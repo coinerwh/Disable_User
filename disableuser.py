@@ -16,8 +16,12 @@ def disable_user(username,list_of_dbs):
                         "Server="+db[0]+";"
                         "Database="+db[1]+";"
                         "uid="+db[2]+";pwd="+db[3])
-            query = "SELECT * FROM Principal WHERE loginname ='" + username + "'"
-            return pd.read_sql_query(query, cnxn)
+            crsr = cnxn.cursor()
+            sql_command = "SELECT * FROM Principal WHERE loginname ='" + username + "'"
+            crsr.execute(sql_command)
+            print(cursor.rowcount, 'products deleted')
+            cnxn.commit()
+            print("SQL executed successfully, deleting",username,"from",db[1])
         except pyodbc.Error as ex:
             sqlstate = ex.args[0]
             if sqlstate == '28000':
@@ -32,8 +36,8 @@ def main():
         with open(databasename, 'r') as infile:
             reader = csv.reader(infile)
             list_of_dbs = list(reader)
-        sqlresults = disable_user(username,list_of_dbs)
-        print(sqlresults)
+        disable_user(username,list_of_dbs)
+
 
 
 if __name__ == '__main__':
@@ -60,3 +64,8 @@ if __name__ == '__main__':
                                   #"Server=axiomepmdb01.database.windows.net;"
                                   #"Database=AxiomSupportTraining;"
                                   #"uid=support_wcoiner;pwd=RhFn++bG69$m,N70")
+
+#query = "SELECT * FROM Principal WHERE loginname ='" + username + "'"
+            #return pd.read_sql_query(query, cnxn)
+
+#"UPDATE Principal SET IsEnabled = FALSE WHERE loginname ='" + username + "'"
