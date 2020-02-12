@@ -23,7 +23,7 @@ def disable_user(username,list_of_dbs):
             cnxn.commit()
             crsr.close()
             cnxn.close()
-            print("SQL executed successfully, deleting",username,"from",db[1])
+            print("SQL executed successfully, disabled",username,"from",db[1])
         except pyodbc.Error as ex:
             sqlstate = ex.args[0]
             if sqlstate == '28000':
