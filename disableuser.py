@@ -17,7 +17,7 @@ def disable_user(username,list_of_dbs):
                         "Database="+db[1]+";"
                         "uid="+db[2]+";pwd="+db[3])
             crsr = cnxn.cursor()
-            sql_command = "SELECT * FROM Principal WHERE loginname ='" + username + "'"
+            sql_command = "UPDATE Principal SET IsEnabled = 'False' WHERE loginname ='" + username + "'"
             crsr.execute(sql_command)
             print(crsr.rowcount, 'users disabled')
             cnxn.commit()
@@ -32,8 +32,8 @@ def disable_user(username,list_of_dbs):
 
 def main():
     bad_credentials = True
+    databasename = str(input("Enter the full file path of database file: "))
     while bad_credentials == True:
-        databasename = str(input("Enter the full file path of database file: "))
         username = str(input("Enter the username: "))
         with open(databasename, 'r') as infile:
             reader = csv.reader(infile)
