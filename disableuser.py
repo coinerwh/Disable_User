@@ -17,10 +17,12 @@ def disable_user(username,list_of_dbs):
                         "Database="+db[1]+";"
                         "uid="+db[2]+";pwd="+db[3])
             crsr = cnxn.cursor()
-            sql_command = "UPDATE Principal SET IsEnabled = FALSE WHERE loginname ='" + username + "'"
+            sql_command = "SELECT * FROM Principal WHERE loginname ='" + username + "'"
             crsr.execute(sql_command)
-            print(cursor.rowcount, 'users disabled')
+            print(crsr.rowcount, 'users disabled')
             cnxn.commit()
+            crsr.close()
+            cnxn.close()
             print("SQL executed successfully, deleting",username,"from",db[1])
         except pyodbc.Error as ex:
             sqlstate = ex.args[0]
