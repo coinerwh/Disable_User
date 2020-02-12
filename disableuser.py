@@ -34,16 +34,22 @@ def main():
             list_of_dbs = list(reader)
         sqlresults = disable_user(username,list_of_dbs)
         print(sqlresults)
-       # if sqlresults == None:
-           # bad_credentials = True
-        #else:
-           # print(sqlresults)
-           # with open('SQL_Results.txt','w') as outfile:
-                #outfile.write(sqlresults)
-           # bad_credentials = False
+
 
 if __name__ == '__main__':
     main()
+
+### Code that writes to file if successful. Loops if unable to execute ###
+
+# if sqlresults == None:
+    # bad_credentials = True
+# else:
+    # print(sqlresults)
+    # with open('SQL_Results.txt','w') as outfile:
+        #outfile.write(sqlresults)
+    # bad_credentials = False
+
+### Dynamic and hardcoded connection code ###
 
 #pyodbc.connect("Driver={SQL Server};"
                     #"Server="+db[0]+";"
