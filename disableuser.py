@@ -1,7 +1,7 @@
 # Wil Coiner
 # 2/10/19
 # Disables user in all cloud systems
-# Requires source database list to be a CSV with 4 columns for driver, server, uid, and pwd
+# Requires source database list to be a CSV with 4 columns for server, database, uid, and pwd
 
 import pyodbc
 import csv
